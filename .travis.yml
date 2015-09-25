@@ -13,8 +13,8 @@ install:
 - conda update -q conda
 - conda config --add channels r
 - conda install conda-build
-- conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
-- source activate test-environment
+#- conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
+#- source activate test-environment
 - conda install anaconda-client anaconda anaconda-build binstar
 - conda info -a
 - conda install r r-essentials
