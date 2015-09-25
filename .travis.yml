@@ -1,34 +1,25 @@
 language: python
 python:
-  # We don't actually use the Travis Python, but this keeps it organized.
-#  - "2.6"
-  - "2.7"
-#  - "3.3"
-#  - "3.4"
+- '2.7'
 install:
-  - sudo apt-get update
-  # We do this conditionally because it saves us some downloading if the
-  # version is the same.
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
-      wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh;
-    else
-      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-    fi
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
-  - conda install conda-build
-  # Useful for debugging any issues with conda
-  - conda info -a
-
-  # Replace dep1 dep2 ... with your dependencies
-  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION 
-  - conda config --add channels r 
-  - source activate test-environment
-  - conda install r r-essentials
-  - for f in `ls | grep r-`;do conda build $f; conda install $f --use-local; done
-
-script:
-  # Your test script goes here
+- sudo apt-get update
+- if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
+  -O miniconda.sh; else wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  -O miniconda.sh; fi
+- bash miniconda.sh -b -p $HOME/miniconda
+- export PATH="$HOME/miniconda/bin:$PATH"
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+- conda update -q conda
+- conda install conda-build anaconda-client
+- conda info -a
+- conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
+- conda config --add channels r
+- source activate test-environment
+- conda install r r-essentials
+#- for f in `ls | grep r-`;do conda build $f; conda install $f --use-local; done
+script: 
+- bash build_and_upload.sh
+env:
+  global:
+    secure: Lw0/x+dUDtnKuZVoJMQC3OFN6j47Iv5f2hQ8ZKJyQJ7us4sye7IDRdfEsMujQ0mhX6aH1cHGe2yOsaY5zUNJ/RgG3MTdxXPWYLwx5TI6umZwOzG8fHdug5d54b99pHyhZRNHSNxDTzhetjQ1Yw6mjP1WLU0wRZReLgvNPTZcc7Pd742s86GrtyBSQqvXjHTZYE2c5Tgq8M2gJ9rTRmHMQSP4jJvT4rvefg4/2CEty1aYm0/Uo18MKOsu51ZSzajzbHYAxAXWoJXbSHJf/cssxVtqkM7Aoiex/01UILjgt/Hp24ONy8F75sJbXBg52Xs1HwSJoh3q07nyvjcx9qI2wDKItdt3/VBr9VzUjFCFOoaJpCQYiO864rhAm22XIuV+r96N2Q11DGwOKrYKdFa2dRj8aHE711KZ3T2DcKwDPM9Z7YeMdq51mwPt0hXKj2KvS5TE/u5X8WjxQTN72RvZgqfCNdEHm/IwzecyZ1BP7zH2jr6RecmxFQPzUH0ufa5Pvd83KVasSudymNXJdDKzRXm8gyKa2mVumiin0ilywNoJnu7AJQvBUsNTvFOW2ZPJq3NumtqghuJcf7XFrbmnbQVV2xPF8UlT8ICKTh/ICNZ9Dzbc1PF93a/7Tsgs4v1Cds60MWcP/2/PsOfxqnhTcQZMT3uhlTOO4rY8TtJeEMw=
