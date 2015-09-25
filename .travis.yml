@@ -13,14 +13,11 @@ install:
 - conda update -q conda
 - conda config --add channels r
 - conda install conda-build
-#- conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
-#- source activate test-environment
 - conda install anaconda-client anaconda anaconda-build binstar
 - conda info -a
 - conda install r r-essentials
-#- for f in `ls | grep r-`;do conda build $f; conda install $f --use-local; done
-script: 
+script:
 - bash build_and_upload.sh
 env:
   global:
-    secure: Lw0/x+dUDtnKuZVoJMQC3OFN6j47Iv5f2hQ8ZKJyQJ7us4sye7IDRdfEsMujQ0mhX6aH1cHGe2yOsaY5zUNJ/RgG3MTdxXPWYLwx5TI6umZwOzG8fHdug5d54b99pHyhZRNHSNxDTzhetjQ1Yw6mjP1WLU0wRZReLgvNPTZcc7Pd742s86GrtyBSQqvXjHTZYE2c5Tgq8M2gJ9rTRmHMQSP4jJvT4rvefg4/2CEty1aYm0/Uo18MKOsu51ZSzajzbHYAxAXWoJXbSHJf/cssxVtqkM7Aoiex/01UILjgt/Hp24ONy8F75sJbXBg52Xs1HwSJoh3q07nyvjcx9qI2wDKItdt3/VBr9VzUjFCFOoaJpCQYiO864rhAm22XIuV+r96N2Q11DGwOKrYKdFa2dRj8aHE711KZ3T2DcKwDPM9Z7YeMdq51mwPt0hXKj2KvS5TE/u5X8WjxQTN72RvZgqfCNdEHm/IwzecyZ1BP7zH2jr6RecmxFQPzUH0ufa5Pvd83KVasSudymNXJdDKzRXm8gyKa2mVumiin0ilywNoJnu7AJQvBUsNTvFOW2ZPJq3NumtqghuJcf7XFrbmnbQVV2xPF8UlT8ICKTh/ICNZ9Dzbc1PF93a/7Tsgs4v1Cds60MWcP/2/PsOfxqnhTcQZMT3uhlTOO4rY8TtJeEMw=
+  - secure: MWxFHWz7gSxXWDGqqh7lkH6dAuWpd0pffUEXvvEDNLPIDCUki4NQxwfyAUdRp5Ai+GYFaYSrZ+Q3D313pEiouc7BexUqvfSqpA6oeIAtG1L3eXhBTv7joIOtn0xWEyWX24YMI7gE7hN6gw2X+FtZPXBfBb+PD8c2oktkVkxq0H+8XiHlnFh+NvBlsCOG1WcbNbRGEDKlMD3x98XtPLt6Q93k5qG4ZdBiX3kT5ap2UIaZp+e6qMxqGX+nbbvSmKjtf6CsCUfDzEyZrcxt198IKQzr//+PAAaN2bS0sx3ho7jhO93CSHz717EP4nC0Qg9TqC1B1lDDDUbJsjyva0wWH5UD5Jv0X5c29oqqhpYt1WGpb9pdAZpNN60Vd4+yDObPDu+rsuIemC2IYg2b9lABkAdaKnJMQqKgx3aGcresCPYXnrJRvZS3dG6Q6Jpw8dkA3FRua1iu2dUn793otpI1q66SVMbMYGFjG572ApdvnDu2PBcW0H6C8dEFaWscWsi5SnVq7qfHkt08dm/wGAm2OJeDdJzWhogMVmTTL1nIFfsNBLVhdEfaSEqsZpoJtTdNHvAzkaadPuavIArp+mND8J5cf1kLe3MOsLM5WT7RDMqmdfl1G/3NAtV0O0ji2IJEBukE75tizA+SdGF4Bhb5B6hiQVfnkzLL/0O8I3y9NmA=
