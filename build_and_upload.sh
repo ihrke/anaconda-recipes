@@ -9,8 +9,12 @@ BUILD_PATH=$CONDA_ENV/conda-bld/$PLATFORM
 
 for f in `ls | grep r-`;
 do 
-
+echo "BUILDING $f"
+echo "==========================================="
 conda build $f; 
 conda install $f --use-local; 
+echo "UPLOADING $f"
+echo "==========================================="
 anaconda -t ${ANACONDA_TOKEN} upload $BUILD_PATH/$f*.tar.bz2 --force
+
 done
