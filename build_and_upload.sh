@@ -12,5 +12,5 @@ do
 
 conda build $f; 
 conda install $f --use-local; 
-anaconda -t ${ANACONDA_TOKEN} upload $BUILD_PATH/$f*.tar.bz2
+anaconda -t ${ANACONDA_TOKEN} upload $BUILD_PATH/$f*.tar.bz2 --force
 done
