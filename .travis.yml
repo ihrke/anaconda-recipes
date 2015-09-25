@@ -11,10 +11,11 @@ install:
 - hash -r
 - conda config --set always_yes yes --set changeps1 no
 - conda update -q conda
-- conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
 - conda config --add channels r
+- conda install conda-build
+- conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
 - source activate test-environment
-- conda install conda-build anaconda-client anaconda anaconda-build
+- conda install anaconda-client anaconda anaconda-build
 - conda info -a
 - conda install r r-essentials
 #- for f in `ls | grep r-`;do conda build $f; conda install $f --use-local; done
