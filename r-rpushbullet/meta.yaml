@@ -1,0 +1,82 @@
+package:
+  name: r-rpushbullet
+  # Note that conda versions cannot contain -, so any -'s in the version have
+  # been replaced with _'s.
+  version: "0.2.0"
+
+source:
+  fn: RPushbullet_0.2.0.tar.gz
+  url:
+    - http://cran.r-project.org/src/contrib/RPushbullet_0.2.0.tar.gz
+    - http://cran.r-project.org/src/contrib/Archive/RPushbullet/RPushbullet_0.2.0.tar.gz
+
+
+  # You can add a hash for the file here, like md5 or sha1
+  # md5: 49448ba4863157652311cc5ea4fea3ea
+  # sha1: 3bcfbee008276084cbb37a2b453963c61176a322
+  # patches:
+   # List any patch files here
+   # - fix.patch
+
+build:
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+  # This is required to make R link correctly on Linux.
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+
+requirements:
+  build:
+    - r
+    - r-rjsonio
+
+  run:
+    - r
+    - r-rjsonio
+
+test:
+  commands:
+    # You can put additional test commands to be run here.
+    - $R -e "library('RPushbullet')" # [not win]
+    - "\"%R%\" -e \"library('RPushbullet')\"" # [win]
+
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
+
+about:
+  #home:
+  license: GPL (>= 2)
+  summary: !!python/unicode 'An R interface to the Pushbullet messaging service which provides
+    fast and efficient notifications (and file transfer) between computers, phones and
+    tablets.  An account has to be registered at the site http://www.pushbullet.com
+    site to obtain a (free) API key.'
+
+
+# The original CRAN metadata for this package was:
+
+# Package: RPushbullet
+# Type: Package
+# Title: R Interface to the Pushbullet Messaging Service
+# Version: 0.2.0
+# Date: 2015-02-09
+# Author: Dirk Eddelbuettel
+# Maintainer: Dirk Eddelbuettel <edd@debian.org>
+# Description: An R interface to the Pushbullet messaging service which provides fast and efficient notifications (and file transfer) between computers, phones and tablets.  An account has to be registered at the site http://www.pushbullet.com site to obtain a (free) API key.
+# Imports: utils, RJSONIO
+# SystemRequirements: The 'curl' binary has to be in the path (and this is checked at package startup), a user API key (which can be obtained from http://www.pushbullet.com), and one or more devices to push messages to which may be any one of an (Android or iOS) phone, the (Chrome or Firefox, or Opera or Safari) browser or (Windows or Mac) desktop application provided the corresponding Pushbullet 'app' has been installed on any one of these.
+# NeedsCompilation: no
+# License: GPL (>= 2)
+# Packaged: 2015-02-09 11:51:59.878426 UTC; edd
+# Repository: CRAN
+# Date/Publication: 2015-02-09 17:32:42
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
