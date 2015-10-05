@@ -13,6 +13,9 @@ echo "BUILDING $f"
 echo "==========================================="
 conda build $f; 
 conda install $f --use-local; 
+echo "CONVERTING $f"
+echo "==========================================="
+conda convert $BUILD_PATPH/$f*.tar.bz2 -p all
 echo "UPLOADING $f"
 echo "==========================================="
 anaconda -t ${ANACONDA_TOKEN} upload $BUILD_PATH/$f*.tar.bz2 --force
