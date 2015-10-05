@@ -1,0 +1,91 @@
+package:
+  name: r-mi
+  # Note that conda versions cannot contain -, so any -'s in the version have
+  # been replaced with _'s.
+  version: "1.0"
+
+source:
+  fn: mi_1.0.tar.gz
+  url:
+    - http://cran.r-project.org/src/contrib/mi_1.0.tar.gz
+    - http://cran.r-project.org/src/contrib/Archive/mi/mi_1.0.tar.gz
+
+
+  # You can add a hash for the file here, like md5 or sha1
+  # md5: 49448ba4863157652311cc5ea4fea3ea
+  # sha1: 3bcfbee008276084cbb37a2b453963c61176a322
+  # patches:
+   # List any patch files here
+   # - fix.patch
+
+build:
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+  # This is required to make R link correctly on Linux.
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+# Suggests: betareg, lattice, knitr, MASS, nnet, parallel, sn, survival, truncnorm, foreign
+requirements:
+  build:
+    - r
+    - r-matrix # [not win]
+    - r-arm >=1.4_11
+
+  run:
+    - r
+    - r-matrix # [not win]
+    - r-arm >=1.4_11
+
+test:
+  commands:
+    # You can put additional test commands to be run here.
+    - $R -e "library('mi')" # [not win]
+    - "\"%R%\" -e \"library('mi')\"" # [win]
+
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
+
+about:
+  home: !!python/unicode 'http://www.stat.columbia.edu/~gelman/'
+
+  license: GPL (>= 2)
+  summary: !!python/unicode 'The mi package provides functions for data manipulation, imputing
+    missing values in an approximate Bayesian framework, diagnostics of the models used
+    to generate the imputations, confidence-building mechanisms to validate some of
+    the assumptions of the imputation algorithm, and functions to analyze multiply imputed
+    data sets with the appropriate degree of sampling uncertainty.'
+
+
+# The original CRAN metadata for this package was:
+
+# Package: mi
+# Type: Package
+# Title: Missing Data Imputation and Model Checking
+# Version: 1.0
+# Date: 2015-04-16
+# Authors@R: c(person("Andrew", "Gelman", email = "gelman@stat.columbia.edu", role = "ctb"),  person("Jennifer", "Hill", email = "jennifer.hill@nyu.edu", role = "ctb"), person("Yu-Sung", "Su", email = "suyusung@tsinghua.edu.cn", role = c("aut")),  person("Masanao", "Yajima", email = "my2167@columbia.edu", role = "ctb"),  person("Maria", "Pittau", email = "grazia@stat.columbia.edu", role = "ctb"),  person("Ben", "Goodrich", email = "benjamin.goodrich@columbia.edu", role = c("cre", "aut")),  person("Yajuan", "Si", email = "sophie2012@gmail.com", role = "ctb"), person("Jon", "Kropko", email = "jkropko@gmail.com", role = "aut"))
+# Description: The mi package provides functions for data manipulation, imputing missing values in an approximate Bayesian framework, diagnostics of the models used to generate the imputations, confidence-building mechanisms to validate some of the assumptions of the imputation algorithm, and functions to analyze multiply imputed data sets with the appropriate degree of sampling uncertainty.
+# VignetteBuilder: knitr
+# Depends: R (>= 3.0.0), methods, Matrix, stats4
+# Imports: arm (>= 1.4-11)
+# Suggests: betareg, lattice, knitr, MASS, nnet, parallel, sn, survival, truncnorm, foreign
+# URL: http://www.stat.columbia.edu/~gelman/
+# License: GPL (>= 2)
+# LazyLoad: yes
+# Packaged: 2015-04-16 14:03:10 UTC; goodrich
+# Author: Andrew Gelman [ctb], Jennifer Hill [ctb], Yu-Sung Su [aut], Masanao Yajima [ctb], Maria Pittau [ctb], Ben Goodrich [cre, aut], Yajuan Si [ctb], Jon Kropko [aut]
+# Maintainer: Ben Goodrich <benjamin.goodrich@columbia.edu>
+# NeedsCompilation: no
+# Repository: CRAN
+# Date/Publication: 2015-04-16 19:53:48
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
