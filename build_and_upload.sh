@@ -7,6 +7,8 @@ CONDA_ENV=$(conda_info root_prefix)
 PLATFORM=$(conda_info platform)
 BUILD_PATH=$CONDA_ENV/conda-bld/$PLATFORM
 
+mkdir convert
+
 for f in `ls | grep r-`;
 do 
 echo "BUILDING $f"
@@ -16,15 +18,17 @@ conda install $f --use-local;
 
 echo "CONVERTING $f"
 echo "==========================================="
+cd convert
 conda convert $BUILD_PATH/$f*.tar.bz2 -p all
+cd ..
 
 echo "UPLOADING $f"
 echo "==========================================="
 #anaconda -t ${ANACONDA_TOKEN} upload $BUILD_PATH/$f*.tar.bz2 --force
-for platf in `ls $CONDA_ENV/conda-bld`;
+for platf in `ls convert/`;
 do
 echo "##UPLOADING $f - $platf"
-anaconda -t ${ANACONDA_TOKEN} upload $CONDA_ENV/conda-bld/$platf/$f*.tar.bz2 --force
+anaconda -t ${ANACONDA_TOKEN} upload convert/$platf/$f*.tar.bz2 --force
 done
 
 done
