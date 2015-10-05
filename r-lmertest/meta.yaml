@@ -1,0 +1,95 @@
+package:
+  name: r-lmertest
+  # Note that conda versions cannot contain -, so any -'s in the version have
+  # been replaced with _'s.
+  version: "2.0_29"
+
+source:
+  fn: lmerTest_2.0-29.tar.gz
+  url:
+    - http://cran.r-project.org/src/contrib/lmerTest_2.0-29.tar.gz
+    - http://cran.r-project.org/src/contrib/Archive/lmerTest/lmerTest_2.0-29.tar.gz
+
+
+  # You can add a hash for the file here, like md5 or sha1
+  # md5: 49448ba4863157652311cc5ea4fea3ea
+  # sha1: 3bcfbee008276084cbb37a2b453963c61176a322
+  # patches:
+   # List any patch files here
+   # - fix.patch
+
+build:
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+  # This is required to make R link correctly on Linux.
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+# Suggests: pbkrtest
+requirements:
+  build:
+    - r
+    - r-hmisc
+    - r-mass # [not win]
+    - r-matrix # [not win]
+    - r-ggplot2
+    - r-lme4 >=1.0
+    - r-plyr
+
+  run:
+    - r
+    - r-hmisc
+    - r-mass # [not win]
+    - r-matrix # [not win]
+    - r-ggplot2
+    - r-lme4 >=1.0
+    - r-plyr
+
+test:
+  commands:
+    # You can put additional test commands to be run here.
+    - $R -e "library('lmerTest')" # [not win]
+    - "\"%R%\" -e \"library('lmerTest')\"" # [win]
+
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
+
+about:
+  #home:
+  license: GPL (>= 2)
+  summary: !!python/unicode 'Different kinds of tests for linear mixed effects models as implemented  in
+    ''lme4'' package are provided. The tests comprise types I - III F tests  for fixed
+    effects, LR tests for random effects.  The package also provides the calculation
+    of population means for fixed factors  with confidence intervals  and corresponding
+    plots. Finally the backward  elimination of non-significant effects is implemented.'
+
+
+# The original CRAN metadata for this package was:
+
+# Package: lmerTest
+# Type: Package
+# Title: Tests in Linear Mixed Effects Models
+# Version: 2.0-29
+# Authors@R: c(person("Alexandra", "Kuznetsova", role = c("aut", "cre"), email = "alku@dtu.dk"), person("Per", "Bruun Brockhoff", role = c("aut", "ths")), person("Rune", "Haubo Bojesen Christensen", role = "aut"))
+# Maintainer: Alexandra Kuznetsova <alku@dtu.dk>
+# Depends: R (>= 3.0.0), Matrix, stats, methods, lme4 (>= 1.0)
+# Imports: plyr, MASS, Hmisc, ggplot2
+# Suggests: pbkrtest
+# Description: Different kinds of tests for linear mixed effects models as implemented  in 'lme4' package are provided. The tests comprise types I - III F tests  for fixed effects, LR tests for random effects.  The package also provides the calculation of population means for fixed factors  with confidence intervals  and corresponding plots. Finally the backward  elimination of non-significant effects is implemented.
+# LazyData: TRUE
+# License: GPL (>= 2)
+# Repository: CRAN
+# NeedsCompilation: no
+# Packaged: 2015-07-16 12:01:01 UTC; alku
+# Author: Alexandra Kuznetsova [aut, cre], Per Bruun Brockhoff [aut, ths], Rune Haubo Bojesen Christensen [aut]
+# Date/Publication: 2015-07-16 14:54:21
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
