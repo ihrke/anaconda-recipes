@@ -20,6 +20,11 @@ conda convert $BUILD_PATH/$f*.tar.bz2 -p all
 
 echo "UPLOADING $f"
 echo "==========================================="
-anaconda -t ${ANACONDA_TOKEN} upload $BUILD_PATH/$f*.tar.bz2 --force
+#anaconda -t ${ANACONDA_TOKEN} upload $BUILD_PATH/$f*.tar.bz2 --force
+for platf in `ls $CONDA_ENV/conda-bld`;
+do
+echo "##UPLOADING $f - $platf"
+anaconda -t ${ANACONDA_TOKEN} upload $CONDA_ENV/conda-bld/$platf/$f*.tar.bz2 --force
+done
 
 done
