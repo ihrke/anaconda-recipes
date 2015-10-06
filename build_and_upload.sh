@@ -19,7 +19,7 @@ conda install $f --use-local;
 echo "CONVERTING $f"
 echo "==========================================="
 cd convert
-conda convert $BUILD_PATH/$f*.tar.bz2 -p all
+conda convert $BUILD_PATH/$f*.tar.bz2 -p all > /dev/null
 cd ..
 
 echo "UPLOADING $f"
